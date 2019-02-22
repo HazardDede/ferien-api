@@ -1,10 +1,14 @@
 # ferien-api
 
+[![PyPI version](https://badge.fury.io/py/ferien-api.svg)](https://badge.fury.io/py/ferien-api)
+[![Build Status](https://travis-ci.org/HazardDede/ferien-api.svg?branch=master)](https://travis-ci.org/HazardDede/ferien-api)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 > Python client library for ferien-api.de
 
 ## Installation
 
-`ferien-api` needs python 3.5 or higher to function properly
+`ferien-api` needs python 3.4 or higher to function properly
 
 ```
 pip install ferien-api
