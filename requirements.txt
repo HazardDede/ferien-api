@@ -1,0 +1,9 @@
+-e .
+
+bumpversion
+flake8
+pytest
+pytest-cov
+twine
+setuptools
+MarkdownPP==1.4

@@ -12,23 +12,7 @@ pip install ferien-api
 
 ## Usage
 
-```python
-import ferien
-
-
-# Get all vacations for all time and states
-print("All vacations:", ferien.all_vacations())
-
-# Get all vacations for a specific state (in this case Hamburg - HH) ...
-print("All vacations for HH:", ferien.state_vacations('HH'))
-
-# ... and optionally for a specific year
-print("All vacations for HH in 2019:", ferien.state_vacations('HH', 2019))
-
-# Fetch all valid states
-print("Valid state codes:", ferien.state_codes())
-
-```
+!INCLUDECODE "./examples/usage.py" (python)
 
 Both functions `all_vacations` and `state_vacations` will return a list of `Vacation` data objects.
 See below for the definition of a `Vacation` object.
