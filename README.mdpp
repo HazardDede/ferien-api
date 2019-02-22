@@ -19,11 +19,11 @@ pip install ferien-api
 You could use the synchronous implementation which will block until a response arrives from the api
 or you could use the async implementation which will be non-blocking your other async stuff.
 
-Synchronous:
+**Synchronous**:
 
 !INCLUDECODE "./examples/run_sync.py" (python)
 
-Asynchronous:
+**Asynchronous**:
 
 !INCLUDECODE "./examples/run_async.py" (python)
 
