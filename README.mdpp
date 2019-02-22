@@ -4,7 +4,7 @@
 
 ## Installation
 
-`ferien-api` needs python 3.5 or higher to function properly
+`ferien-api` needs python 3.4 or higher to function properly
 
 ```
 pip install ferien-api

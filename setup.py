@@ -51,6 +51,6 @@ setup(
         'attrs>=18.0.0'
         'requests>=2.0.0'
     ],
-    python_requires='>=3.5',
+    python_requires='>=3.4',
     include_package_data=True
 )
