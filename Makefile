@@ -76,7 +76,7 @@ revoke-version:
 		git reset --hard HEAD~1                        # rollback the commit
 
 sdist:
-		rm dist/*
+		rm -f dist/*
 		python setup.py sdist
 
 release-test: sdist
