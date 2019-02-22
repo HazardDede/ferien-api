@@ -7,6 +7,9 @@ from datetime import datetime
 @attr.s
 class Vacation:
     """
+    Internal representation of a single vacation
+    (from .. to, naming, ...)
+
     A typical result json looks like that one below:
     {
       "start":"2017-01-29T23:00",

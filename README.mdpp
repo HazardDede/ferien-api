@@ -8,7 +8,7 @@
 
 ## Installation
 
-`ferien-api` needs python 3.4 or higher to function properly
+`ferien-api` needs python 3.5+ to function properly
 
 ```
 pip install ferien-api
@@ -16,9 +16,18 @@ pip install ferien-api
 
 ## Usage
 
-!INCLUDECODE "./examples/usage.py" (python)
+You could use the synchronous implementation which will block until a response arrives from the api
+or you could use the async implementation which will be non-blocking your other async stuff.
 
-Both functions `all_vacations` and `state_vacations` will return a list of `Vacation` data objects.
+Synchronous:
+
+!INCLUDECODE "./examples/run_sync.py" (python)
+
+Asynchronous:
+
+!INCLUDECODE "./examples/run_async.py" (python)
+
+Both implementations of `all_vacations` and `state_vacations` will return a list of `Vacation` data objects.
 See below for the definition of a `Vacation` object.
 
 ```python
@@ -32,7 +41,15 @@ Vacation(
 )
 ```
 
+Using the async version it is easy to make multiple requests in "parallel" (not true... you know that when you are
+an asyncio enthusiast) and save a lot of time:
+
+!INCLUDECODE "./examples/run_async_gather.py" (python)
+
 ## Changelog
+
+**0.2.0**
+* Adds an async implementation of `all_vacations` and `state_vacations`
 
 **0.1.0**
 * Initial version

@@ -2,10 +2,9 @@ from unittest.mock import patch
 
 import pytest
 
-import ferien.client as dut
+import ferien.sync_ as dut
 from ferien.const import ALL_STATE_CODES
 from ferien.model import Vacation
-
 
 DUMMY_RESP = [
     {

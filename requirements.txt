@@ -1,8 +1,10 @@
 -e .
 
+aioresponses
 bumpversion
 flake8
 pytest>=3.6
+pytest-asyncio
 pytest-cov
 twine
 setuptools

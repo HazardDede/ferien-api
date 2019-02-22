@@ -36,7 +36,6 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
@@ -49,9 +48,10 @@ setup(
     },
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=[
+        'aiohttp>=3.5.0'
         'attrs>=18.0.0'
         'requests>=2.0.0'
     ],
-    python_requires='>=3.4',
+    python_requires='>=3.5',
     include_package_data=True
 )

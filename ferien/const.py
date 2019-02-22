@@ -1,3 +1,5 @@
+"""Useful constants"""
+
 ALL_STATE_CODES = [
     "BW", "BY", "BE", "BB", "HB", "HH",
     "HE", "MV", "NI", "NW", "RP", "SL",
