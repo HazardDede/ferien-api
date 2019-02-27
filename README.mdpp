@@ -48,6 +48,9 @@ an asyncio enthusiast) and save a lot of time:
 
 ## Changelog
 
+**0.3.0**
+* Adds `current_vacation` and `next_vacation` implementations
+
 **0.2.0**
 * Adds an async implementation of `all_vacations` and `state_vacations`
 

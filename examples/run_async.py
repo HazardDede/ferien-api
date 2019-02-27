@@ -16,6 +16,12 @@ async def main():
     # Fetch all valid states. This one is _NOT_ async
     print("Valid state codes:", ferien.state_codes())
 
+    # Get current vacation (None if there is no vacation)
+    print("Current vacation in HH:", ferien.current_vacation(vacs=await ferien.state_vacations_async('HH')))
+
+    # Get next vacation (None if there is no next vacation)
+    print("Next vacation in HH:", ferien.next_vacation(vacs=await ferien.state_vacations_async('HH')))
+
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()

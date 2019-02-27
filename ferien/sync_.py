@@ -1,6 +1,5 @@
 """Synchronous implementation using requests"""
-
-from .util import parse_state_code, parse_year
+from .util import parse_state_code, parse_year, find_current, find_next
 from .const import (ALL_STATE_CODES, API_ALL_URL,
                     API_STATE_URL, API_STATE_YEAR_URL)
 from .model import Vacation
@@ -46,3 +45,28 @@ def state_vacations(state_code, year=None):
         )
 
     return _convert_json(resp)
+
+
+def current_vacation(state_code=None, vacs=None, dt=None):
+    """Returns the current vacation based on the given dt.
+    Returns None if no vacation surrounds (start, end) the
+    given dt."""
+    return _apply_fun(find_current, state_code, vacs, dt)
+
+
+def next_vacation(state_code=None, vacs=None, dt=None):
+    """Returns the next vacation based on the given dt.
+    Returns None if no vacation is left."""
+    return _apply_fun(find_next, state_code, vacs, dt)
+
+
+def _apply_fun(fun, state_code=None, vacs=None, dt=None):
+    assert fun is not None
+
+    if vacs:
+        return fun(vacs, dt)
+    elif state_code:
+        return fun(state_vacations(state_code), dt)
+
+    raise ValueError("You have to either specify argument 'state_code' "
+                     "or argument 'vacs'")

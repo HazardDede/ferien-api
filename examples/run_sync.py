@@ -14,6 +14,12 @@ def main():
     # Fetch all valid states
     print("Valid state codes:", ferien.state_codes())
 
+    # Get current vacation (None if there is no vacation)
+    print("Current vacation in HH:", ferien.current_vacation('HH'))
+
+    # Get next vacation (None if there is no next vacation)
+    print("Next vacation in HH:", ferien.next_vacation('HH'))
+
 
 if __name__ == '__main__':
     main()

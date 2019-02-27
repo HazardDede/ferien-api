@@ -1,3 +1,4 @@
+from datetime import datetime
 from unittest.mock import patch
 
 import pytest
@@ -83,3 +84,65 @@ def test_get_state_vacations_with_bad_year():
     with pytest.raises(TypeError) as e:
         dut.state_vacations('HH', 'abc')
     assert "TypeError: Argument year is expected to be an int, but is <class 'str'>" in str(e)
+
+
+@patch('requests.get')
+def test_current_vacation(mock_requests):
+    _configure_mock(mock_requests)
+
+    res = dut.current_vacation(vacs=EXPECTED, dt=datetime.strptime('2017-01-30', '%Y-%m-%d'))
+    assert res == EXPECTED[0]
+    res = dut.current_vacation(vacs=EXPECTED, dt=datetime.strptime('2017-04-22', '%Y-%m-%d'))
+    assert res == EXPECTED[1]
+    res = dut.current_vacation(vacs=EXPECTED, dt=datetime.strptime('2017-01-01', '%Y-%m-%d'))
+    assert res is None
+
+    res = dut.current_vacation(state_code='HB', dt=datetime.strptime('2017-01-30', '%Y-%m-%d'))
+    assert res == EXPECTED[0]
+    res = dut.current_vacation(state_code='HB', dt=datetime.strptime('2017-04-22', '%Y-%m-%d'))
+    assert res == EXPECTED[1]
+    res = dut.current_vacation(state_code='HB', dt=datetime.strptime('2017-01-01', '%Y-%m-%d'))
+    assert res is None
+
+
+def test_current_vacation_arguments_fail():
+    with pytest.raises(ValueError) as e:
+        dut.current_vacation()
+    assert "ValueError: You have to either specify argument 'state_code' or argument 'vacs'" in str(e)
+
+
+@patch('requests.get')
+def test_next_vacation(mock_requests):
+    _configure_mock(mock_requests)
+
+    res = dut.next_vacation(vacs=EXPECTED, dt=datetime.strptime('2017-01-29', '%Y-%m-%d'))
+    assert res == EXPECTED[0]
+    res = dut.next_vacation(vacs=EXPECTED, dt=datetime.strptime('2017-02-01', '%Y-%m-%d'))
+    assert res == EXPECTED[1]
+    res = dut.next_vacation(vacs=EXPECTED, dt=datetime.strptime('2017-05-01', '%Y-%m-%d'))
+    assert res is None
+
+    res = dut.next_vacation(state_code='HB', dt=datetime.strptime('2017-01-29', '%Y-%m-%d'))
+    assert res == EXPECTED[0]
+    res = dut.next_vacation(state_code='HB', dt=datetime.strptime('2017-02-01', '%Y-%m-%d'))
+    assert res == EXPECTED[1]
+    res = dut.next_vacation(state_code='HB', dt=datetime.strptime('2017-05-01', '%Y-%m-%d'))
+    assert res is None
+
+
+def test_next_vacation_arguments_fail():
+    with pytest.raises(ValueError) as e:
+        dut.next_vacation()
+    assert "ValueError: You have to either specify argument 'state_code' or argument 'vacs'" in str(e)
+
+    with pytest.raises(TypeError) as e:
+        dut.next_vacation(vacs="abc")
+    assert "TypeError: Argument 'vacs' is expected to an iterable, but is <class 'str'>" in str(e)
+
+    with pytest.raises(TypeError) as e:
+        dut.next_vacation(vacs=["abc"])
+    assert "TypeError: Item 0 of argument 'vacs' is expected to be of type 'Vacation', but is <class 'str'>" in str(e)
+
+    with pytest.raises(TypeError) as e:
+        dut.next_vacation(vacs=EXPECTED, dt="abc")
+    assert "TypeError: Argument 'dt' is expected to be of type 'datetime', but is <class 'str'>" in str(e)
