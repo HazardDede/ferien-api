@@ -1,3 +1,5 @@
+"""ferien-api public members."""
+
 from .sync_ import (
     state_codes,
     all_vacations,

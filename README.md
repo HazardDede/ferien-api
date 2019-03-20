@@ -128,6 +128,9 @@ if __name__ == '__main__':
 
 ## Changelog
 
+**0.3.1**
+* Adds pylint as a linter and make him happy!
+
 **0.3.0**
 * Adds `current_vacation` and `next_vacation` implementations
 

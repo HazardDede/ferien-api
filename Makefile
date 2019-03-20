@@ -47,6 +47,7 @@ docs: README.mdpp
 
 lint:
 		flake8 $(SOURCE_PATH)
+		pylint $(SOURCE_PATH)
 
 test:
 		pytest --verbose --color=yes -s \

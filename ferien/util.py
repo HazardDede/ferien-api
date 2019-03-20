@@ -6,6 +6,8 @@ from .const import ALL_STATE_CODES
 
 
 def parse_state_code(candidate):
+    """Parses the given candidate as a state code. Raises a ValueError
+    when the candidate is not a valid state code."""
     state_code = str(candidate)
     if state_code not in ALL_STATE_CODES:
         raise ValueError("Argument state_code (current: '{}') is expected "
@@ -14,6 +16,8 @@ def parse_state_code(candidate):
 
 
 def parse_year(candidate):
+    """Parses the given candidate as a year literal. Raises a ValueError
+    when the candidate is not a valid year."""
     if candidate is not None and not isinstance(candidate, int):
         raise TypeError("Argument year is expected to be an int, "
                         "but is {}".format(type(candidate)))
@@ -21,6 +25,8 @@ def parse_year(candidate):
 
 
 def is_iterable_but_no_str(candidate):
+    """Tests if the given candidate is an iterable (list, tuple, ...)
+    but not a string."""
     return (
         hasattr(candidate, '__iter__')
         and not isinstance(candidate, (str, bytes))
@@ -28,16 +34,18 @@ def is_iterable_but_no_str(candidate):
 
 
 def check_vac_list(vacs):
+    """Checks if the given list is an actual list of vacations."""
     if not is_iterable_but_no_str(vacs):
         raise TypeError("Argument 'vacs' is expected to an iterable, "
                         "but is {}".format(type(vacs)))
-    for i, v in enumerate(vacs):
-        if not isinstance(v, Vacation):
+    for i, val in enumerate(vacs):
+        if not isinstance(val, Vacation):
             raise TypeError("Item {} of argument 'vacs' is expected to be of "
-                            "type 'Vacation', but is {}".format(i, type(v)))
+                            "type 'Vacation', but is {}".format(i, type(val)))
 
 
 def check_datetime(dt):
+    """Checks if the argment dt is a valid datetime."""
     if dt and not isinstance(dt, datetime):
         raise TypeError("Argument 'dt' is expected to be of type 'datetime', "
                         "but is {}".format(type(dt)))
@@ -52,7 +60,7 @@ def find_current(vacs, dt=None):
 
     dt = dt or datetime.now()
     res = [i for i in vacs if i.start <= dt <= i.end][-1:]
-    if len(res) <= 0:
+    if not res:
         return None
     return res[0]
 
@@ -65,6 +73,6 @@ def find_next(vacs, dt=None):
 
     dt = dt or datetime.now()
     res = sorted([i for i in vacs if i.start >= dt], key=lambda i: i.start)
-    if len(res) <= 0:
+    if not res:
         return None
     return res[0]

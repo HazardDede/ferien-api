@@ -1,9 +1,11 @@
 """Contains data models to convert result json to our business object model"""
 
-import attr
 from datetime import datetime
 
+import attr
 
+
+# pylint: disable=too-few-public-methods
 @attr.s
 class Vacation:
     """
@@ -47,6 +49,7 @@ class Vacation:
 
     @classmethod
     def from_dict(cls, dct):
+        """Initializes the Vacation model from a dictionary instance."""
         return cls(
             start=datetime.strptime(dct.get('start'), '%Y-%m-%dT%H:%M'),
             end=datetime.strptime(dct.get('end'), '%Y-%m-%dT%H:%M'),

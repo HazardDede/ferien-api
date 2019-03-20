@@ -1,4 +1,5 @@
-"""Synchronous implementation using requests"""
+"""Synchronous implementation using requests."""
+
 from .util import parse_state_code, parse_year, find_current, find_next
 from .const import (ALL_STATE_CODES, API_ALL_URL,
                     API_STATE_URL, API_STATE_YEAR_URL)
@@ -19,6 +20,7 @@ def _convert_json(resp):
 
 
 def state_codes():
+    """Returns all known and valid state codes."""
     import copy
     return copy.copy(ALL_STATE_CODES)
 
@@ -65,7 +67,7 @@ def _apply_fun(fun, state_code=None, vacs=None, dt=None):
 
     if vacs:
         return fun(vacs, dt)
-    elif state_code:
+    if state_code:
         return fun(state_vacations(state_code), dt)
 
     raise ValueError("You have to either specify argument 'state_code' "
