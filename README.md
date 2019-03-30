@@ -2,6 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/ferien-api.svg)](https://badge.fury.io/py/ferien-api)
 [![Build Status](https://travis-ci.org/HazardDede/ferien-api.svg?branch=master)](https://travis-ci.org/HazardDede/ferien-api)
+[![Coverage Status](https://coveralls.io/repos/github/HazardDede/ferien-api/badge.svg?branch=master)](https://coveralls.io/github/HazardDede/ferien-api?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > Python client library for ferien-api.de
