@@ -129,6 +129,10 @@ if __name__ == '__main__':
 
 ## Changelog
 
+**0.3.2**
+* Adds type hints to codebase
+* Adds mypy as a linter
+
 **0.3.1**
 * Adds pylint as a linter and make him happy!
 

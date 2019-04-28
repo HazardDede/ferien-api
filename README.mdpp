@@ -49,6 +49,10 @@ an asyncio enthusiast) and save a lot of time:
 
 ## Changelog
 
+**0.3.2**
+* Adds type hints to codebase
+* Adds mypy as a linter
+
 **0.3.1**
 * Adds pylint as a linter and make him happy!
 
