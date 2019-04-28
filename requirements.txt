@@ -4,6 +4,7 @@ aioresponses
 bumpversion
 coveralls
 flake8
+mypy==0.701
 pylint
 pytest>=3.6
 pytest-asyncio
