@@ -1,5 +1,7 @@
 """Useful constants"""
 
+import pytz
+
 ALL_STATE_CODES = [
     "BW", "BY", "BE", "BB", "HB", "HH",
     "HE", "MV", "NI", "NW", "RP", "SL",
@@ -12,3 +14,5 @@ API_STATE_URL = 'https://ferien-api.de/api/v1/holidays/{state_code}'
 
 API_STATE_YEAR_URL = 'https://ferien-api.de/api/v1/holidays/' \
                      '{state_code}/{year}'
+
+UTC = pytz.UTC

@@ -48,8 +48,9 @@ setup(
     },
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=[
-        'aiohttp>=3.5.0'
-        'attrs>=18.0.0'
+        'aiohttp>=3.5.0',
+        'attrs>=18.0.0',
+        'pytz>=2015.2',
         'requests>=2.0.0'
     ],
     python_requires='>=3.5',
