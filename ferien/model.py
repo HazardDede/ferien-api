@@ -4,7 +4,7 @@ from datetime import datetime
 
 import attr
 
-from .const import UTC
+from .const import TZ_GERMANY
 from .types import StateCode, APIItem
 
 
@@ -54,12 +54,13 @@ class Vacation:
     def _parse_date(candidate: str) -> datetime:
         # Parse iso format
         dt = datetime.strptime(candidate, '%Y-%m-%dT%H:%M')
-        # All dates from the api are UTC
-        return dt.replace(tzinfo=UTC)
+        # All dates from the api are Europe/Berlin (CET/CEST)
+        return dt.replace(tzinfo=TZ_GERMANY)
 
     @classmethod
     def from_dict(cls, dct: APIItem) -> 'Vacation':
         """Initializes the Vacation model from a dictionary instance."""
+
         return cls(
             start=cls._parse_date(dct['start']),
             end=cls._parse_date(dct['end']),

@@ -42,6 +42,8 @@ Vacation(
 )
 ```
 
+*Please note*: All datetime objects are in the `Europe/Berlin (CET/CEST)` timezone
+
 Using the async version it is easy to make multiple requests in "parallel" (not true... you know that when you are
 an asyncio enthusiast) and save a lot of time:
 

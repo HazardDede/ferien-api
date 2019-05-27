@@ -2,7 +2,7 @@
 from datetime import datetime
 from typing import Iterable, Any, Optional, cast
 
-from .const import ALL_STATE_CODES, UTC
+from .const import ALL_STATE_CODES, TZ_GERMANY
 from .model import Vacation
 
 
@@ -13,12 +13,12 @@ def is_tz_aware_timestamp(dt: datetime) -> bool:
 
 def make_tz_aware_timestamp(dt: Optional[datetime]) -> datetime:
     """Make a timezone aware timestamp based on the given dt.
-    1. dt is None: datetime.now() in utc timezone
+    1. dt is None: datetime.now() in german timezone
     2. dt has timezone: Return as is
-    3. dt has no timezone: Assume that is utc and set timezone."""
+    3. dt has no timezone: Assume that is german tz and set it."""
     dt = dt or datetime.now()
     if not is_tz_aware_timestamp(dt):
-        dt = dt.replace(tzinfo=UTC)
+        dt = dt.replace(tzinfo=TZ_GERMANY)
     return dt
 
 
