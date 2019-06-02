@@ -131,6 +131,9 @@ if __name__ == '__main__':
 
 ## Changelog
 
+**0.3.3**
+* Changes all timestamps from naive to 'Europe/Berlin'
+
 **0.3.2**
 * Adds type hints to codebase
 * Adds mypy as a linter
