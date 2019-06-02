@@ -4,6 +4,7 @@ from datetime import datetime
 
 import attr
 
+from .const import TZ_GERMANY
 from .types import StateCode, APIItem
 
 
@@ -49,12 +50,20 @@ class Vacation:
         converter=str
     )  # type: str
 
+    @staticmethod
+    def _parse_date(candidate: str) -> datetime:
+        # Parse iso format
+        dt = datetime.strptime(candidate, '%Y-%m-%dT%H:%M')
+        # All dates from the api are Europe/Berlin (CET/CEST)
+        return dt.replace(tzinfo=TZ_GERMANY)
+
     @classmethod
     def from_dict(cls, dct: APIItem) -> 'Vacation':
         """Initializes the Vacation model from a dictionary instance."""
+
         return cls(
-            start=datetime.strptime(dct['start'], '%Y-%m-%dT%H:%M'),
-            end=datetime.strptime(dct['end'], '%Y-%m-%dT%H:%M'),
+            start=cls._parse_date(dct['start']),
+            end=cls._parse_date(dct['end']),
             year=dct['year'],
             state_code=dct['stateCode'],
             name=dct.get('name', 'none'),

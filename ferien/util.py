@@ -2,8 +2,24 @@
 from datetime import datetime
 from typing import Iterable, Any, Optional, cast
 
-from .const import ALL_STATE_CODES
+from .const import ALL_STATE_CODES, TZ_GERMANY
 from .model import Vacation
+
+
+def is_tz_aware_timestamp(dt: datetime) -> bool:
+    """Checks if the passed timestamp is tz aware or not."""
+    return dt.tzinfo is not None and dt.tzinfo.utcoffset(dt) is not None
+
+
+def make_tz_aware_timestamp(dt: Optional[datetime]) -> datetime:
+    """Make a timezone aware timestamp based on the given dt.
+    1. dt is None: datetime.now() in german timezone
+    2. dt has timezone: Return as is
+    3. dt has no timezone: Assume that is german tz and set it."""
+    dt = dt or datetime.now()
+    if not is_tz_aware_timestamp(dt):
+        dt = dt.replace(tzinfo=TZ_GERMANY)
+    return dt
 
 
 def parse_state_code(candidate: Any) -> str:
@@ -46,7 +62,7 @@ def check_vac_list(vacs: Iterable[Vacation]) -> None:
 
 
 def check_datetime(dt: Any) -> None:
-    """Checks if the argment dt is a valid datetime."""
+    """Checks if the argument dt is a valid datetime."""
     if dt and not isinstance(dt, datetime):
         raise TypeError("Argument 'dt' is expected to be of type 'datetime', "
                         "but is {}".format(type(dt)))
@@ -60,7 +76,7 @@ def find_current(vacs: Iterable[Vacation],
     check_vac_list(vacs)
     check_datetime(dt)
 
-    dt = dt or datetime.now()
+    dt = make_tz_aware_timestamp(dt)
     res = [i for i in vacs if i.start <= dt <= i.end][-1:]
     if not res:
         return None
@@ -74,7 +90,7 @@ def find_next(vacs: Iterable[Vacation],
     check_vac_list(vacs)
     check_datetime(dt)
 
-    dt = dt or datetime.now()
+    dt = make_tz_aware_timestamp(dt)
     res = sorted([i for i in vacs if i.start >= dt], key=lambda i: i.start)
     if not res:
         return None
