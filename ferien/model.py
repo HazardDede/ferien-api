@@ -55,7 +55,7 @@ class Vacation:
         # Parse iso format
         dt = datetime.strptime(candidate, '%Y-%m-%dT%H:%M')
         # All dates from the api are Europe/Berlin (CET/CEST)
-        return dt.replace(tzinfo=TZ_GERMANY)
+        return TZ_GERMANY.localize(dt)
 
     @classmethod
     def from_dict(cls, dct: APIItem) -> 'Vacation':
