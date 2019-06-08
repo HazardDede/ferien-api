@@ -131,6 +131,9 @@ if __name__ == '__main__':
 
 ## Changelog
 
+**0.3.4**
+* Fixes incorrect localization to Europe/Berlin for dates
+
 **0.3.3**
 * Changes all timestamps from naive to 'Europe/Berlin'
 
