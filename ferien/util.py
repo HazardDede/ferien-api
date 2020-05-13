@@ -16,7 +16,7 @@ def make_tz_aware_timestamp(dt: Optional[datetime]) -> datetime:
     1. dt is None: datetime.now() in german timezone
     2. dt has timezone: Return as is
     3. dt has no timezone: Assume that is german tz and set it."""
-    dt = dt or datetime.now()
+    dt = dt or datetime.now(tz=TZ_GERMANY)
     if not is_tz_aware_timestamp(dt):
         dt = dt.replace(tzinfo=TZ_GERMANY)
     return dt
@@ -92,6 +92,7 @@ def find_next(vacs: Iterable[Vacation],
 
     dt = make_tz_aware_timestamp(dt)
     res = sorted([i for i in vacs if i.start >= dt], key=lambda i: i.start)
+    print(res)
     if not res:
         return None
     return res[0]
