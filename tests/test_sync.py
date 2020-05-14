@@ -53,9 +53,8 @@ def test_get_all_vacations(mock_requests):
 def test_get_all_vacations_bad_status_code(mock_requests):
     _configure_mock(mock_requests, 500, response="Not a teapot")
 
-    with pytest.raises(RuntimeError) as e:
+    with pytest.raises(RuntimeError, match="ferien-api.de failed with http code = '500'") as e:
         dut.all_vacations()
-    assert "RuntimeError: ferien-api.de failed with http code = '500'" in str(e)
 
 
 @patch('requests.get')
@@ -77,13 +76,11 @@ def test_get_state_vacations_by_state_year(mock_requests):
 def test_get_state_vacations_unknown_state():
     with pytest.raises(ValueError) as e:
         dut.state_vacations('UKW')
-    assert "ValueError: Argument state_code (current: 'UKW') is expected to be one of " in str(e)
 
 
 def test_get_state_vacations_with_bad_year():
-    with pytest.raises(TypeError) as e:
+    with pytest.raises(TypeError, match="Argument year is expected to be an int, but is <class 'str'>") as e:
         dut.state_vacations('HH', 'abc')
-    assert "TypeError: Argument year is expected to be an int, but is <class 'str'>" in str(e)
 
 
 @patch('requests.get')
@@ -106,9 +103,8 @@ def test_current_vacation(mock_requests):
 
 
 def test_current_vacation_arguments_fail():
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(ValueError, match="You have to either specify argument 'state_code' or argument 'vacs'") as e:
         dut.current_vacation()
-    assert "ValueError: You have to either specify argument 'state_code' or argument 'vacs'" in str(e)
 
 
 @patch('requests.get')
@@ -131,18 +127,14 @@ def test_next_vacation(mock_requests):
 
 
 def test_next_vacation_arguments_fail():
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(ValueError, match="You have to either specify argument 'state_code' or argument 'vacs'") as e:
         dut.next_vacation()
-    assert "ValueError: You have to either specify argument 'state_code' or argument 'vacs'" in str(e)
 
-    with pytest.raises(TypeError) as e:
+    with pytest.raises(TypeError, match="Argument 'vacs' is expected to an iterable, but is <class 'str'>") as e:
         dut.next_vacation(vacs="abc")
-    assert "TypeError: Argument 'vacs' is expected to an iterable, but is <class 'str'>" in str(e)
 
-    with pytest.raises(TypeError) as e:
+    with pytest.raises(TypeError, match="Item 0 of argument 'vacs' is expected to be of type 'Vacation', but is <class 'str'>") as e:
         dut.next_vacation(vacs=["abc"])
-    assert "TypeError: Item 0 of argument 'vacs' is expected to be of type 'Vacation', but is <class 'str'>" in str(e)
 
-    with pytest.raises(TypeError) as e:
+    with pytest.raises(TypeError, match="Argument 'dt' is expected to be of type 'datetime', but is <class 'str'>") as e:
         dut.next_vacation(vacs=EXPECTED, dt="abc")
-    assert "TypeError: Argument 'dt' is expected to be of type 'datetime', but is <class 'str'>" in str(e)

@@ -41,9 +41,8 @@ async def test_get_all_vacations_bad_status_code():
     with aioresponses() as m:
         m.get('https://ferien-api.de/api/v1/holidays', status=500)
 
-        with pytest.raises(RuntimeError) as e:
+        with pytest.raises(RuntimeError, match="ferien-api.de failed with http code = '500'") as e:
             await dut.all_vacations_async()
-        assert "RuntimeError: ferien-api.de failed with http code = '500'" in str(e)
 
 
 @pytest.mark.asyncio
