@@ -4,11 +4,11 @@ aioresponses
 bumpversion
 coveralls
 flake8
-mypy==0.701
+mypy
 pylint
-pytest>=3.6
+pytest>=5.4.0
 pytest-asyncio
 pytest-cov
 twine
 setuptools
-MarkdownPP==1.4
+MarkdownPP
