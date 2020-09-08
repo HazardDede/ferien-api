@@ -92,7 +92,6 @@ def find_next(vacs: Iterable[Vacation],
 
     dt = make_tz_aware_timestamp(dt)
     res = sorted([i for i in vacs if i.start >= dt], key=lambda i: i.start)
-    print(res)
     if not res:
         return None
     return res[0]
