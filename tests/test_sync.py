@@ -17,8 +17,8 @@ DUMMY_RESP = [
       "slug": "winterferien-2017-HB"
     },
     {
-      "start": "2017-04-09T22:00",
-      "end": "2017-04-22T22:00",
+      "start": "2017-04-09T22:00Z",
+      "end": "2017-04-22T22:00Z",
       "year": 2017,
       "stateCode": "HB",
       "name": "osterferien",
