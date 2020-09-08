@@ -1,6 +1,6 @@
 .PHONY: clean-pyc clean-build clean lint test doctest rollback version
 
-VERSION='0.3.4'
+VERSION='0.3.5'
 SOURCE_PATH=./ferien
 TEST_PATH=./tests
 
