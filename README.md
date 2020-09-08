@@ -131,6 +131,9 @@ if __name__ == '__main__':
 
 ## Changelog
 
+**0.3.6**
+* Removes unnecessary print statement in utils.py
+
 **0.3.5**
 * Adds strptime fallback for Z remainder (#5)
 
