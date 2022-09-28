@@ -53,14 +53,7 @@ class Vacation:
     @staticmethod
     def _parse_date(candidate: str) -> datetime:
         # Parse iso format
-        try:
-            # Date format before 2020-09-07
-            # Keep it if the Z remainder was introduced by accident
-            dt = datetime.strptime(candidate, '%Y-%m-%dT%H:%M')
-        except ValueError:
-            # Date format after 2020-09-07
-            dt = datetime.strptime(candidate, '%Y-%m-%dT%H:%MZ')
-        # All dates from the api are Europe/Berlin (CET/CEST)
+        dt = datetime.fromisoformat(candidate)
         return TZ_GERMANY.localize(dt)
 
     @classmethod
