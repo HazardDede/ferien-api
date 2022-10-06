@@ -53,7 +53,7 @@ class Vacation:
     @staticmethod
     def _parse_date(candidate: str) -> datetime:
         # Parse iso format
-        dt = datetime.fromisoformat(candidate)
+        dt = datetime.strptime(candidate, '%Y-%m-%d')
         return TZ_GERMANY.localize(dt)
 
     @classmethod
