@@ -3,6 +3,9 @@ python:
   - 3.5
   - 3.6
   - 3.7
+before_install:
+  - pip install --upgrade pip
+  - pip install --upgrade importlib-metadata
 install:
   - pip install -r requirements.txt
 script:
