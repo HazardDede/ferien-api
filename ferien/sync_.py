@@ -1,18 +1,22 @@
 """Synchronous implementation using requests."""
+import copy
 from datetime import datetime
 from typing import cast, List, Iterable, Optional, Callable
 
-from .const import (ALL_STATE_CODES, API_ALL_URL,
-                    API_STATE_URL, API_STATE_YEAR_URL)
+from .const import (
+    ALL_STATE_CODES, API_ALL_URL, API_STATE_URL, API_STATE_YEAR_URL,
+    API_TIMEOUT
+)
 from .model import Vacation
 from .types import APIResponse, APIUrl, StateCode
 from .util import parse_state_code, parse_year, find_current, find_next
 
 
 def _make_api_request(api_url: APIUrl) -> APIResponse:
-    import requests
-    resp = requests.get(api_url)
+    import requests  # pylint: disable=import-outside-toplevel
+    resp = requests.get(api_url, timeout=API_TIMEOUT)
     if resp.status_code != 200:
+        # pylint: disable=consider-using-f-string
         raise RuntimeError("ferien-api.de failed with http code = '{}'\n"
                            "Error: {}".format(resp.status_code, resp.text))
     return cast(APIResponse, resp.json())
@@ -24,7 +28,6 @@ def _convert_json(resp: APIResponse) -> List[Vacation]:
 
 def state_codes() -> List[StateCode]:
     """Returns all known and valid state codes."""
-    import copy
     return copy.copy(ALL_STATE_CODES)
 
 

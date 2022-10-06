@@ -10,10 +10,15 @@ from .util import parse_state_code, parse_year
 
 
 async def _make_api_request(api_url: APIUrl) -> APIResponse:
+    # pylint: disable=import-outside-toplevel
     import aiohttp
+    import certifi
+    import ssl
+    sslcontext = ssl.create_default_context(cafile=certifi.where())
     async with aiohttp.ClientSession() as session:
-        async with session.get(api_url) as resp:
+        async with session.get(api_url, ssl=sslcontext) as resp:
             if resp.status != 200:
+                # pylint: disable=consider-using-f-string
                 raise RuntimeError(
                     "ferien-api.de failed with http code = '{}'\n"
                     "Error: {}".format(
