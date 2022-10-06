@@ -10,5 +10,7 @@ pytest>=5.4.0
 pytest-asyncio
 pytest-cov
 twine
+types-pytz
+types-requests
 setuptools
 MarkdownPP

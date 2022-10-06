@@ -15,4 +15,6 @@ API_STATE_URL = 'https://ferien-api.de/api/v1/holidays/{state_code}'
 API_STATE_YEAR_URL = 'https://ferien-api.de/api/v1/holidays/' \
                      '{state_code}/{year}'
 
+API_TIMEOUT = 5
+
 TZ_GERMANY = pytz.timezone("Europe/Berlin")

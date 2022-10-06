@@ -18,7 +18,7 @@ def make_tz_aware_timestamp(dt: Optional[datetime]) -> datetime:
     3. dt has no timezone: Assume that is german tz and set it."""
     dt = dt or datetime.now(tz=TZ_GERMANY)
     if not is_tz_aware_timestamp(dt):
-        dt = dt.replace(tzinfo=TZ_GERMANY)
+        dt = TZ_GERMANY.localize(dt)
     return dt
 
 
@@ -27,6 +27,7 @@ def parse_state_code(candidate: Any) -> str:
     when the candidate is not a valid state code."""
     state_code = str(candidate)
     if state_code not in ALL_STATE_CODES:
+        # pylint: disable=consider-using-f-string
         raise ValueError("Argument state_code (current: '{}') is expected "
                          "to be one of {}".format(state_code, ALL_STATE_CODES))
     return state_code
@@ -36,6 +37,7 @@ def parse_year(candidate: Any) -> int:
     """Parses the given candidate as a year literal. Raises a ValueError
     when the candidate is not a valid year."""
     if candidate is not None and not isinstance(candidate, int):
+        # pylint: disable=consider-using-f-string
         raise TypeError("Argument year is expected to be an int, "
                         "but is {}".format(type(candidate)))
     return cast(int, candidate)
@@ -53,10 +55,12 @@ def is_iterable_but_no_str(candidate: Any) -> bool:
 def check_vac_list(vacs: Iterable[Vacation]) -> None:
     """Checks if the given list is an actual list of vacations."""
     if not is_iterable_but_no_str(vacs):
+        # pylint: disable=consider-using-f-string
         raise TypeError("Argument 'vacs' is expected to an iterable, "
                         "but is {}".format(type(vacs)))
     for i, val in enumerate(vacs):
         if not isinstance(val, Vacation):
+            # pylint: disable=consider-using-f-string
             raise TypeError("Item {} of argument 'vacs' is expected to be of "
                             "type 'Vacation', but is {}".format(i, type(val)))
 
@@ -64,6 +68,7 @@ def check_vac_list(vacs: Iterable[Vacation]) -> None:
 def check_datetime(dt: Any) -> None:
     """Checks if the argument dt is a valid datetime."""
     if dt and not isinstance(dt, datetime):
+        # pylint: disable=consider-using-f-string
         raise TypeError("Argument 'dt' is expected to be of type 'datetime', "
                         "but is {}".format(type(dt)))
 
@@ -91,6 +96,7 @@ def find_next(vacs: Iterable[Vacation],
     check_datetime(dt)
 
     dt = make_tz_aware_timestamp(dt)
+
     res = sorted([i for i in vacs if i.start >= dt], key=lambda i: i.start)
     if not res:
         return None

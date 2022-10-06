@@ -48,7 +48,7 @@ docs: README.mdpp
 lint:
 		flake8 $(SOURCE_PATH)
 		pylint $(SOURCE_PATH)
-		mypy --strict $(SOURCE_PATH)
+		mypy --strict --no-warn-unused-ignores $(SOURCE_PATH)
 
 test:
 		pytest --verbose --color=yes -s \

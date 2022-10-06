@@ -9,16 +9,16 @@ from ferien.model import Vacation
 
 DUMMY_RESP = [
     {
-      "start": "2017-01-29T23:00",
-      "end": "2017-01-31T23:00",
+      "start": "2017-01-29",
+      "end": "2017-01-31",
       "year": 2017,
       "stateCode": "HB",
       "name": "winterferien",
       "slug": "winterferien-2017-HB"
     },
     {
-      "start": "2017-04-09T22:00Z",
-      "end": "2017-04-22T22:00Z",
+      "start": "2017-04-09",
+      "end": "2017-04-22",
       "year": 2017,
       "stateCode": "HB",
       "name": "osterferien",
