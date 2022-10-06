@@ -12,8 +12,8 @@ from .util import parse_state_code, parse_year
 async def _make_api_request(api_url: APIUrl) -> APIResponse:
     # pylint: disable=import-outside-toplevel
     import aiohttp
-    import certifi
-    import ssl
+    import certifi  # type: ignore
+    import ssl  # type: ignore
     sslcontext = ssl.create_default_context(cafile=certifi.where())
     async with aiohttp.ClientSession() as session:
         async with session.get(api_url, ssl=sslcontext) as resp:
