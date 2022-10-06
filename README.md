@@ -132,8 +132,8 @@ if __name__ == '__main__':
 ## Changelog
 
 **0.3.7**
-* Adapts the vacation date parsing logic to the new ferien-api standard
-* Fixes some linting errors using the latest linter / mypy
+* Adapts the vacation date parsing logic to the new ferien-api standard (#8)
+* Fixes some linting errors using the latest linter / mypy (#8)
 
 **0.3.6**
 * Removes unnecessary print statement in utils.py
